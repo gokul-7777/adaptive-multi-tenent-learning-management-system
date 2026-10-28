@@ -1,0 +1,11 @@
+{
+  "title": "Adaptive Multi-Tenant Learning Management System",
+  "description": "Streamline academic management with a centralized platform for administrators and faculty to efficiently handle student records, attendance, and reports.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
