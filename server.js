@@ -818,21 +818,24 @@ app.post("/api/proctor-incidents", (req, res) => {
   res.status(201).json({ ok: true, incident: newIncident });
 });
 
-const startServer = (port) => {
-  const server = app.listen(port, "0.0.0.0", () => {
-    console.log(`🌐 Backend Server running at: http://localhost:${port}`);
-    console.log(`📡 Ready for logins and API requests.`);
-    console.log(`💡 Note: Leave this terminal OPEN while using the application.\n`);
-  });
+export default app;
 
-  server.on("error", (error) => {
-    if (error.code === "EADDRINUSE") {
-      console.log(`ℹ️ Port ${port} is already running an active backend instance.`);
-      return;
-    }
+if (process.env.NODE_ENV !== "production") {
+  const startServer = (port) => {
+    const server = app.listen(port, "0.0.0.0", () => {
+      console.log(`🌐 Backend Server running at: http://localhost:${port}`);
+      console.log(`📡 Ready for logins and API requests.`);
+    });
 
-    throw error;
-  });
-};
+    server.on("error", (error) => {
+      if (error.code === "EADDRINUSE") {
+        console.log(`ℹ️ Port ${port} is already running an active backend instance.`);
+        return;
+      }
 
-startServer(DEFAULT_PORT);
+      throw error;
+    });
+  };
+
+  startServer(DEFAULT_PORT);
+}

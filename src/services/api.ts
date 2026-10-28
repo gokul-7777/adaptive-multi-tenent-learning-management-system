@@ -2,8 +2,8 @@ import { COURSES, type Course, RESOURCES, DEFAULT_RESOURCES, type Resource, type
 
 const CANDIDATE_HOSTS = [
   typeof window !== "undefined" && import.meta.env.VITE_API_BASE_URL ? import.meta.env.VITE_API_BASE_URL : null,
-  "http://localhost:5000",
-  "http://127.0.0.1:5000",
+  import.meta.env.DEV ? "http://localhost:5000" : null,
+  import.meta.env.DEV ? "http://127.0.0.1:5000" : null,
   "", // fallback to current origin through Vite proxy
 ].filter((url): url is string => typeof url === "string");
 
